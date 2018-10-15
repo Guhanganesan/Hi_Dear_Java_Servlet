@@ -1,0 +1,46 @@
+How init() method working?
+     
+	 index.html:-
+	 
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		 <h2>Hi dear friend</h2>
+	</body>
+	</html>
+	-----------------------------------------------------------
+	Test_Init.java:-
+	
+	import java.io.IOException;
+	import java.io.PrintWriter;
+
+	import javax.servlet.annotation.WebServlet;
+	import javax.servlet.http.HttpServlet;
+	import javax.servlet.http.HttpServletRequest;
+	import javax.servlet.http.HttpServletResponse;
+
+	@WebServlet("/Test_Init")
+	public class Test_Init extends HttpServlet
+	{
+		private String message;
+		public void init()
+		{
+			message = "Welcome Mr. Guhan";
+		}
+		
+		public void service(HttpServletRequest req, HttpServletResponse res) throws IOException
+		{
+			PrintWriter out = res.getWriter();
+			out.println(message);
+		}
+		
+	}
+
+	To Run:
+	
+	http://localhost:8080/test/Test_Init
+	
