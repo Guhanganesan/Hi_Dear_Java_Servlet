@@ -1,0 +1,50 @@
+index.html:-
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+     <h2>Get Method</h2>
+     
+     <form action="DoPost" method="get">
+           Data1: <input name="x"><br><br>
+           Data2: <input name="y"><br><br>
+                  <input type="submit" name="submit" values="submit">
+     
+     </form>
+</body>
+</html>
+
+-------------------------------------------------------------------------
+
+DoGet.java:-
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/DoPost")
+public class DoPost extends HttpServlet
+{
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException
+	{
+		String x= req.getParameter("x");
+		String y=req.getParameter("y");
+		
+		PrintWriter out = res.getWriter();
+		            
+		            out.println(x);
+		            out.println(y);
+	}
+}
+
+To Run:-
+
+http://localhost:8080/test/
