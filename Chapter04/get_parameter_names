@@ -1,0 +1,46 @@
+index.html:-
+
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+		</head>
+		<body>
+			 <h2>Get Method</h2>
+			 <form action="GetParameters" method="post">
+				   Maths: <input type="checkbox" name="x" ><br><br>
+				   Tamil: <input type="checkbox" name="y" ><br><br>
+						  <input type="submit" name="submit" values="submit">
+			</form>
+		</body>
+		</html>
+		
+---------------------------------------------------------------------------------
+
+GetParameters.java:-
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/GetParameters")
+public class GetParameters extends HttpServlet
+{
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException
+	{
+	    Enumeration<String> names = req.getParameterNames();
+	    PrintWriter out = res.getWriter();
+	    while(names.hasMoreElements())
+	    {
+	    	out.print(names.nextElement()+"  ");
+	    }
+	}
+}
+
+Run:-
+
+http://localhost:10453/test/GetParameters
