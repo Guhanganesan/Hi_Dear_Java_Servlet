@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+     <h2>Get Method</h2>
+     <form action="GetParameters" method="post">
+           Maths: <input type="checkbox" name="x" value="maths"><br><br>
+           Tamil: <input type="checkbox" name="y" value="tamil"><br><br>
+                  <input type="submit" name="submit" value="signup">
+    </form>
+</body>
+</html>
+
+-----------------------------------------------------------------------------
+
+GetParameters.java:-
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/GetParameters")
+public class GetParameters extends HttpServlet
+{
+	String[] values;
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException
+	{
+		String m;
+	    Enumeration<String> names = req.getParameterNames();
+	    
+	    PrintWriter out = res.getWriter();
+	    
+	    while(names.hasMoreElements())
+	    {
+	    	//out.print(names.nextElement()+"  ");
+	    	String s=(String)names.nextElement();
+	    	String[] values=req.getParameterValues(s);
+	    	//out.println(values.length);
+	    	if(values.length==1)
+	    	{
+	    	  String pmval= values[0];//multi dimensional
+	    	  out.println(pmval);
+	    	}
+	    }
+	   
+}
+}
+
+Run:-
+
+http://localhost:8080/test/GetParameters
+
+maths
+tamil
+signup
