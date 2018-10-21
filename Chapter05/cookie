@@ -1,0 +1,73 @@
+index.html:-
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+      <h2>Welcome</h2>
+      <form method="get" action="GetPage">
+         Name:<input name="x"><br>
+         Mobile:<input name="y"><br>
+        <input type="submit" name="submit" value="submit">
+      </form>
+</body>
+</html>
+
+-------------------------------------------------------------
+GetPage.java:-
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/GetPage")
+public class GetPage extends HttpServlet
+{
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException
+	{
+		String x = req.getParameter("x");
+		String y = req.getParameter("y");
+		
+		Cookie cookie1 = new Cookie("name",x);
+		Cookie cookie2 =new Cookie("mob",y);
+		res.addCookie(cookie1);
+		res.addCookie(cookie2);
+		res.sendRedirect("ReDirect");
+	   
+	 }
+}
+
+---------------------------------------------------------
+ReDirect.java:-
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/ReDirect")
+public class ReDirect extends HttpServlet
+{
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException
+	{
+		Cookie arr[] = req.getCookies();
+		PrintWriter out = res.getWriter();
+		
+		for(Cookie a:arr)
+		{
+			out.println(a.getValue());
+			out.println(a.getName());
+		}
+	}
+}
+
+----------------------------------------------------------------------------
